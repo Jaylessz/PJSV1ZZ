@@ -857,7 +857,7 @@ MainTab:CreateToggle({
         TEKFOGP = State 
         while TEKFOGP and IsOpen() do 
             RG:Breath(-5)
-            task.wait(0.1) -- 💡 küçük bekleme eklemek önemli, yoksa oyun donar
+            task.wait(0.1)
         end 
     end,
     SectionParent = MiscMainSection
