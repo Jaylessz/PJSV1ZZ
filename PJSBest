@@ -35,7 +35,6 @@ local AuraSection = MainTab:CreateSection("Aura")
 local TeleportsSection = MainTab:CreateSection("Teleports")
 local InfoSection = MainTab:CreateSection("Info")
 
--- Misc Sekmesi Bölümleri
 local MiscMainSection = MiscTab:CreateSection("Main")
 local MiscTrollSection = MiscTab:CreateSection("Troll")
 local MiscMiscSection = MiscTab:CreateSection("Misc")
@@ -850,17 +849,20 @@ MiscMain:AddToggle({
     end 
 })
 
-MiscMain:AddToggle({
+MainTab:CreateToggle({
     Name = "Inf Breath",
-    Value = false,
+    CurrentValue = false,
     Flag = "Breath",
     Callback = function(State)
         TEKFOGP = State 
         while TEKFOGP and IsOpen() do 
             RG:Breath(-5)
+            task.wait(0.1) -- 💡 küçük bekleme eklemek önemli, yoksa oyun donar
         end 
-    end 
+    end,
+    SectionParent = MiscMainSection
 })
+
 
 ToggleGod = MiscMain:AddToggle({
     Name = "Regeneration | Kamado",
