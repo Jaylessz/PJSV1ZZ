@@ -1,3 +1,7 @@
+repeat task.wait() until Player.Character and Player.Character:FindFirstChild("HumanoidRootPart")
+local Character = Player.Character
+local HumanoidRootPart = Character:WaitForChild("HumanoidRootPart")
+
 local Library = loadstring(game:GetObjects("rbxassetid://7657867786")[1].Source)()
 local Subs = Library.subs 
 local IsOpen = Subs.Wait
