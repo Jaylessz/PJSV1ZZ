@@ -24,31 +24,21 @@ local Window = Rayfield:CreateWindow({
     }
 })
 
-local MainTab = Window:CreateTab("Main", 4483362458)
-local MiscTab = Window:CreateTab("Misc", 4483362458)
+local Main = Window:CreateTab("Main", 4483362458)
+local Misc = Window:CreateTab("Misc", 4483362458)
 
 
-local FarmingSection = MainTab:CreateSection("Auto-Farm")
-local PlayersSection = MainTab:CreateSection("Players")
-local SettingsSection = MainTab:CreateSection("Settings")
-local BossStatusSection = MainTab:CreateSection("Living Bosses")
-local AuraSection = MainTab:CreateSection("Aura")
-local TeleportsSection = MainTab:CreateSection("Teleports")
-local InfoSection = MainTab:CreateSection("Info")
+local Farming = MainTab:CreateSection("Auto-Farm")
+local PPlayers = MainTab:CreateSection("Players")
+local Settings = MainTab:CreateSection("Settings")
+local BossStatus = MainTab:CreateSection("Living Bosses")
+local Aura = MainTab:CreateSection("Aura")
+local Teleports = MainTab:CreateSection("Teleports")
+local Info = MainTab:CreateSection("Info")
 
-local MiscMainSection = MiscTab:CreateSection("Main")
-local MiscTrollSection = MiscTab:CreateSection("Troll")
-local MiscMiscSection = MiscTab:CreateSection("Misc")
-
-local Toggle = MiscMainSection:CreateToggle({
-   Name = "Toggle Example",
-   CurrentValue = false,
-   Flag = "Toggle1", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
-   Callback = function(Value)
-   -- The function that takes place when the toggle is pressed
-   -- The variable (Value) is a boolean on whether the toggle is true or false
-   end,
-})
+local MiscMain = MiscTab:CreateSection("Main")
+local MiscTroll = MiscTab:CreateSection("Troll")
+local MiscMisc = MiscTab:CreateSection("Misc")
 
 local table = table 
 local insert = table.insert 
