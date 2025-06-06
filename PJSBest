@@ -1,7 +1,5 @@
--- Rayfield UI Kütüphanesini Yükle
 local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
 
--- Ana UI Penceresi
 local Window = Rayfield:CreateWindow({
     Name = "Johnny",
     LoadingTitle = "Johnny Hub",
@@ -26,11 +24,9 @@ local Window = Rayfield:CreateWindow({
     }
 })
 
--- Sekmeler
 local MainTab = Window:CreateTab("Main", 4483362458)
 local MiscTab = Window:CreateTab("Misc", 4483362458)
 
--- Main Sekmesi Bölümleri
 local FarmingSection = MainTab:CreateSection("Auto-Farm")
 local PlayersSection = MainTab:CreateSection("Players")
 local SettingsSection = MainTab:CreateSection("Settings")
