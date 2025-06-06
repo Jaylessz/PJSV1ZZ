@@ -45,6 +45,19 @@ local task = task
 local spawn = task.spawn 
 local pcall = pcall
 
+-- UI yüklendikten sonra toggle ekleniyor
+MiscTab:CreateToggle({
+    Name = "Test Toggle (Misc Main)",
+    CurrentValue = false,
+    Flag = "TestToggleMiscMain",
+    Callback = function(Value)
+        print("Toggle çalıştı. Durum:", Value)
+    end,
+    SectionParent = MiscMainSection
+})
+
+
+
 local CoreGui = game:GetService("CoreGui")
 local StarterPack = game:GetService("StarterPack")
 local Workspace = game:GetService("Workspace")
