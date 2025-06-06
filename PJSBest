@@ -849,7 +849,7 @@ MiscMain:AddToggle({
     end 
 })
 
-MainTab:CreateToggle({
+MiscMainSection:CreateToggle({
     Name = "Inf Breath",
     CurrentValue = false,
     Flag = "Breath",
@@ -859,8 +859,7 @@ MainTab:CreateToggle({
             RG:Breath(-5)
             task.wait(0.1)
         end 
-    end,
-    SectionParent = MiscMainSection
+    end
 })
 
 
