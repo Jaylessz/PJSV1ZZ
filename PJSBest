@@ -27,6 +27,7 @@ local Window = Rayfield:CreateWindow({
 local MainTab = Window:CreateTab("Main", 4483362458)
 local MiscTab = Window:CreateTab("Misc", 4483362458)
 
+
 local FarmingSection = MainTab:CreateSection("Auto-Farm")
 local PlayersSection = MainTab:CreateSection("Players")
 local SettingsSection = MainTab:CreateSection("Settings")
@@ -39,23 +40,21 @@ local MiscMainSection = MiscTab:CreateSection("Main")
 local MiscTrollSection = MiscTab:CreateSection("Troll")
 local MiscMiscSection = MiscTab:CreateSection("Misc")
 
+MiscTab:CreateToggle({
+    Name = "Test Toggle (Misc Main)",
+    CurrentValue = false,
+    Flag = "MiscTestToggle",
+    Callback = function(Value)
+        print("Toggle Triggered:", Value)
+    end,
+    SectionParent = MiscMainSection
+})
+
 local table = table 
 local insert = table.insert 
 local task = task
 local spawn = task.spawn 
 local pcall = pcall
-
--- UI yüklendikten sonra toggle ekleniyor
-MiscTab:CreateToggle({
-    Name = "Test Toggle (Misc Main)",
-    CurrentValue = false,
-    Flag = "TestToggleMiscMain",
-    Callback = function(Value)
-        print("Toggle çalıştı. Durum:", Value)
-    end,
-    SectionParent = MiscMainSection
-})
-
 
 
 local CoreGui = game:GetService("CoreGui")
