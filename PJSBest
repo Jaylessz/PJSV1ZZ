@@ -1,69 +1,39 @@
-local Library = loadstring(game:GetObjects("rbxassetid://7657867786")[1].Source)()
-local Subs = Library.subs 
-local IsOpen = Subs.Wait
+-- Rayfield UI Kütüphanesini Yükle
+local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
 
-local Core = Library:CreateWindow({
+-- Ana UI Penceresi
+local Window = Rayfield:CreateWindow({
     Name = "Johnny",
-    Themeable = {
-        Info = {"Johnny TOP1"},
-        Credit = false, 
-        Background = "",
-        Visible = true
-    }
+    LoadingTitle = "Johnny TOP1",
+    LoadingSubtitle = "By YourName",
+    ConfigurationSaving = {
+        Enabled = true,
+        FolderName = "JohnnyUIConfig",
+        FileName = "UISettings"
+    },
+    Discord = {
+        Enabled = false
+    },
+    KeySystem = false
 })
 
-local Main = Core:CreateTab({
-    Name = "Main"
-})
+-- Sekmeler
+local MainTab = Window:CreateTab("Main", 4483362458)
+local MiscTab = Window:CreateTab("Misc", 4483362458)
 
-local Misc = Core:CreateTab({
-    Name = "Misc"
-})
+-- Main Sekmesi Bölümleri
+local FarmingSection = MainTab:CreateSection("Auto-Farm")
+local PlayersSection = MainTab:CreateSection("Players")
+local SettingsSection = MainTab:CreateSection("Settings")
+local BossStatusSection = MainTab:CreateSection("Living Bosses")
+local AuraSection = MainTab:CreateSection("Aura")
+local TeleportsSection = MainTab:CreateSection("Teleports")
+local InfoSection = MainTab:CreateSection("Info")
 
-local Farming = Main:CreateSection({
-    Name = "Auto-Farm"
-})
-
-local PPlayers = Main:CreateSection({
-    Name = "Players"
-})
-
-local Settings = Main:CreateSection({
-    Name = "Settings"
-})
-
-local BossStatus = Main:CreateSection({
-    Name = "Living Bosses"
-})
-
-local Aura = Main:CreateSection({
-    Name = "Aura",
-    Side = "Right"
-})
-
-local Teleports = Main:CreateSection({
-    Name = "Teleports",
-    Side = "Right"
-})
-
-local Info = Main:CreateSection({
-    Name = "Info",
-    Side = "Right"
-})
-
-local MiscMain = Misc:CreateSection({
-    Name = "Main"
-})
-
-local MiscTroll = Misc:CreateSection({
-    Name = "Troll",
-    Side = "Right"
-})
-
-local MiscMisc = Misc:CreateSection({
-    Name = "Misc",
-    Side = "Right"
-})
+-- Misc Sekmesi Bölümleri
+local MiscMainSection = MiscTab:CreateSection("Main")
+local MiscTrollSection = MiscTab:CreateSection("Troll")
+local MiscMiscSection = MiscTab:CreateSection("Misc")
 
 local table = table 
 local insert = table.insert 
