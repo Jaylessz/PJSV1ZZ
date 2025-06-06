@@ -3,9 +3,9 @@ local Subs = Library.subs
 local IsOpen = Subs.Wait
 
 local Core = Library:CreateWindow({
-    Name = "Novaline",
+    Name = "Johnny",
     Themeable = {
-        Info = {"Novaz Best UwU"},
+        Info = {"Johnny TOP1"},
         Credit = false, 
         Background = "",
         Visible = true
