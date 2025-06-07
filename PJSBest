@@ -271,22 +271,6 @@ spawn(function()
     end 
 end)
 
-
-loadstring([[
-local Old 
-Old = hookmetamethod(game, "__namecall", function(self, ...)
-    local Method = getnamecallmethod()
-    if Method == "FireServer" or Method == "fireServer" then 
-        local Args = {...}
-        local Tbl = Args[4]
-        if self.Name == "moddelteasdasd123" or self.Name == "Sun_Damage" or (type(Tbl) == "table" and Tbl["Name"] == "CancelThunderClash") then 
-            return 
-        end 
-    end 
-    return Old(self, ...)
-end)
-]])()
-
 FireAttack(1)
 Combo = Player:WaitForChild("combotangasd123")
 
