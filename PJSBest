@@ -271,22 +271,6 @@ spawn(function()
     end 
 end)
 
-Signals[#Signals + 1] = Debree.ChildAdded:Connect(function(v)
-    if OSTPRKGL and v.Name == "Loot_Chest" then 
-        local Remote = v:WaitForChild("Add_To_Inventory")
-        local Drops = v:WaitForChild("Drops")  
-        repeat 
-            for i,v in next, Drops:GetChildren() do 
-                Remote:InvokeServer(v.Name)
-            end
-            task.wait(0.25)
-        until not v.Parent
-    elseif PRMFLDS and v.Name == "Soul" then 
-        local Handle = v:WaitForChild("Handle")
-        local Eat = Handle:WaitForChild("Eatthedamnsoul")
-        Eat:FireServer()
-    end 
-end)
 
 loadstring([[
 local Old 
