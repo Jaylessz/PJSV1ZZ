@@ -1,13 +1,13 @@
 local Rayfield = loadstring(game:HttpGet('https://raw.githubusercontent.com/shlexware/Rayfield/main/source'))()
 
 local Window = Rayfield:CreateWindow({
-    Name = "Novaline",
-    LoadingTitle = "Novaline UI",
-    LoadingSubtitle = "Novaline by You",
+    Name = "Johnny",
+    LoadingTitle = "Johnny UI",
+    LoadingSubtitle = "Johnny by You",
     ConfigurationSaving = {
         Enabled = true,
         FolderName = nil, -- nil means default folder
-        FileName = "NovalineConfig"
+        FileName = "JohnnyConfig"
     },
     Discord = {
         Enabled = false,
