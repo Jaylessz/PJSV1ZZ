@@ -179,7 +179,6 @@ local Map1List = {}
 for i,v in next, Map2 do insert(Map2List, i) end
 for i,v in next, Map1 do insert(Map1List, i) end
 local AliveBosses = {}
-local Signals = Library.signals
 
 local IsBoss = function(Instance)
     if BossFolder then 
@@ -239,17 +238,6 @@ local FireAttack = function(i)
     )    
 end 
 
-local InvokeAttack = function(i)
-    return Handle_Initiate_S_:InvokeServer(
-        SelectedWeapon, 
-        Player, 
-        Character, 
-        HumanoidRootPart,
-        Humanoid, 
-        i,
-        Method
-    )    
-end 
 local GetClosestFlower = function()
     local Ret = {nil, 9999999}
     for i,v in next, Flowers:GetChildren() do 
@@ -271,32 +259,7 @@ local GetClosestFlower = function()
     return Ret
 end 
 
-for i,v in next, MobFolder:GetDescendants() do spawn(pcall, Added, v) end 
-Signals[#Signals + 1] = MobFolder.DescendantAdded:Connect(Added)
-Signals[#Signals + 1] = MobFolder.DescendantRemoving:Connect(Removed)
 
-Signals[#Signals + 1] = Player.CharacterAdded:Connect(function(Char)
-    Character = Char
-    HumanoidRootPart = Character:WaitForChild("HumanoidRootPart")
-    Humanoid = Character:WaitForChild("Humanoid")
-end)
-
-Signals[#Signals + 1] = Stepped:Connect(function()
-    if XLROPFK or Teleporting or XLROPRT or SKTIEP then 
-        for i,v in next, Character:GetDescendants() do 
-            if v:IsA("BasePart") then 
-                v.CanCollide = false 
-            end 
-        end 
-        HumanoidRootPart.Velocity = Vector3.zero
-    end 
-    if WalkSpeed and Humanoid.WalkSpeed < WalkSpeed then 
-        Humanoid.WalkSpeed = WalkSpeed 
-    end 
-    if JumpPower and Humanoid.JumpPower < JumpPower then 
-        Humanoid.JumpPower = JumpPower
-    end 
-end)
 
 spawn(function()
     while true and IsOpen() do 
