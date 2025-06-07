@@ -225,62 +225,6 @@ local Count = function(Table)
     for i,v in next, Table do Ret = Ret + 1 end
     return Ret 
 end 
-    
-local SelectedBosses, SelectedMobs = {}, {}
-local GetClosestMob = function()
-    local Ret = {nil, 9999999, nil}
-    local Merged = {}
-    for i,v in next, SelectedBosses do Merged[#Merged + 1] = v end
-    for i,v in next, SelectedMobs do Merged[#Merged + 1] = v end
-    local Length = Count(Merged)
-    for i,v in next, Entities do 
-        local Mob = v[1]
-        if not Mob then continue end
-        if Length > 0 and (not find(Merged, Mob.Name)) then continue end
-        local Spawn = v[2]
-        local HRP = Mob:FindFirstChild("HumanoidRootPart")
-        local Humanoid = Mob:FindFirstChild("Humanoid")
-        if Humanoid and Humanoid.Health > 0 then 
-            if HRP then 
-                local Dist = (HumanoidRootPart.Position - HRP.Position).Magnitude 
-                if Dist < Ret[2] then 
-                    Ret[1] = HRP.CFrame 
-                    Ret[2] = Dist
-                    Ret[3] = Mob 
-                    Ret[4] = HRP 
-                end 
-            elseif Spawn then 
-                local Dist = (HumanoidRootPart.Position - Spawn).Magnitude 
-                if Dist < Ret[2] then 
-                    Ret[1] = CFrame.new(Spawn) 
-                    Ret[2] = Dist 
-                    Ret[3] = Mob 
-                end 
-            end 
-        end 
-    end 
-    return Ret 
-end 
-
-local GetClosestPlayer = function()
-    local Ret = {nil, 99999999}
-    for i,v in next, Players:GetPlayers() do 
-        if (v == Player) or (Player.Team and (Player.Team == v.Team)) then continue end
-        local Character = v.Character 
-        local HRP = Character and Character:FindFirstChild("HumanoidRootPart")
-        local UpperTorso = Character and Character:FindFirstChild("UpperTorso")
-        local IsDead = UpperTorso and UpperTorso:FindFirstChild("Revive_Humanoid")
-        if HRP and UpperTorso and (not IsDead) then 
-            local Dist = (HRP.Position - HumanoidRootPart.Position).Magnitude 
-            if Dist < Ret[2] then
-                Ret[1] = HRP.CFrame 
-                Ret[2] = Dist
-                Ret[3] = v
-            end 
-        end 
-    end 
-    return Ret 
-end 
 
 local Method, SelectedWeapon = "", "fist_combat"
 local FireAttack = function(i)
