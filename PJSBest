@@ -1,1 +1,112 @@
-Hello Everyone!
+local Rayfield = loadstring(game:HttpGet('https://raw.githubusercontent.com/shlexware/Rayfield/main/source'))()
+
+local Window = Rayfield:CreateWindow({
+    Name = "Johnny",
+    LoadingTitle = "Johnny UI",
+    LoadingSubtitle = "Johnny by You",
+    ConfigurationSaving = {
+        Enabled = false,
+    },
+    KeySystem = false
+})
+
+local MainTab = Window:CreateTab("Main")
+
+-- Section oluştur
+local FarmingSection = MainTab:CreateSection("Auto-Farm")
+
+-- Örnek global değişkenler (kendi scriptine göre ayarla)
+local Player = game.Players.LocalPlayer
+local Character = Player.Character or Player.CharacterAdded:Wait()
+local HumanoidRootPart = Character:WaitForChild("HumanoidRootPart")
+local Handle_Initiate_S = game:GetService("ReplicatedStorage"):WaitForChild("Handle_Initiate_S") -- Örnek remote event
+local Debree = workspace:WaitForChild("Debree") -- Örnek
+
+-- Basit IsOpen fonksiyonu: Rayfield penceresi açık mı?
+local function IsOpen()
+    return Window:IsOpen()
+end
+
+-- Dummy GetClosestMob fonksiyonu (kendi oyun mantığına göre değiştir)
+local function GetClosestMob()
+    -- Örnek geri dönüş: {CFrame, Distance, MobObject}
+    -- Senin kendi oyununda mobları nasıl seçiyorsan ona göre yaz
+    local closestMob = nil
+    local closestDistance = math.huge
+    for _, mob in pairs(workspace.Mobs:GetChildren()) do
+        if mob:FindFirstChild("HumanoidRootPart") then
+            local dist = (mob.HumanoidRootPart.Position - HumanoidRootPart.Position).Magnitude
+            if dist < closestDistance then
+                closestDistance = dist
+                closestMob = mob
+            end
+        end
+    end
+    if closestMob then
+        return {closestMob.HumanoidRootPart.CFrame, closestDistance, closestMob}
+    else
+        return {nil, nil, nil}
+    end
+end
+
+-- Toggle 1: L1
+FarmingSection:AddToggle({
+    Name = "L1",
+    Value = false,
+    Flag = "Arrow",
+    Callback = function(State)
+        local Arrow = State
+        spawn(function()
+            while Arrow and IsOpen() do
+                pcall(function()
+                    Handle_Initiate_S:FireServer("skil_ting_asd", Player, "arrow_knock_back", 5)
+                    for i = 1, 50 do
+                        local Data = GetClosestMob()
+                        local Mob = Data[3]
+                        local CF = Data[1]
+                        if CF and IsOpen() and Arrow then
+                            Handle_Initiate_S:FireServer("arrow_knock_back_damage", Character, CF, Mob, 200, 200)
+                        end
+                        task.wait(0.13)
+                    end
+                end)
+                task.wait(0.1)
+            end
+        end)
+    end
+})
+
+-- Toggle 2: L2
+FarmingSection:AddToggle({
+    Name = "L2",
+    Value = false,
+    Flag = "Arrow2",
+    Callback = function(State)
+        local Arrow2 = State
+        spawn(function()
+            while Arrow2 and IsOpen() do
+                pcall(function()
+                    Handle_Initiate_S:FireServer("skil_ting_asd", Player, "arrow_knock_back", 5)
+                    for i = 1, 50 do
+                        local Data = GetClosestMob()
+                        local Mob = Data[3]
+                        if Mob and Arrow2 and IsOpen() then
+                            Handle_Initiate_S:FireServer("Arrow_knock_back_throw", Player, HumanoidRootPart, HumanoidRootPart.CFrame + Vector3.new(0, 1, 0))
+                            local Part = Debree:WaitForChild(Player.Name.."'s arrow")
+                            local Damage = Part:FindFirstChild("Damagething")
+                            Handle_Initiate_S:FireServer("Koketsu_arrow_damage", Character, Part, HumanoidRootPart.CFrame, Mob)
+                            spawn(function()
+                                while Damage and Damage.Parent and IsOpen() do
+                                    Damage:FireServer()
+                                    task.wait(0.1)
+                                end
+                            end)
+                        end
+                        task.wait(0.13)
+                    end
+                end)
+                task.wait(0.1)
+            end
+        end)
+    end
+})
