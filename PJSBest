@@ -224,17 +224,27 @@ local find = function(Table, Value) for i,v in next, Table do if v == Value then
 local Added = function(Instance)
     local Parent = Instance.Parent 
     if (not Instance:IsA("Model")) or ((not Parent:IsA("Configuration")) and (not Parent:IsA("Folder"))) then return end 
-    local Config = Parent:WaitForChild("Npc_Configuration")
-    Config = require(Config)
+    
+    local ConfigModule = Parent:WaitForChild("Npc_Configuration")
+    -- ModuleScript olduğundan emin ol
+    if not ConfigModule or ConfigModule.ClassName ~= "ModuleScript" then
+        warn("Npc_Configuration is not a ModuleScript!")
+        return
+    end
+    
+    local Config = require(ConfigModule)
     local Spawn = Config.Npc_Spawning.Spawn_Locations[1]
+    
     if IsBoss(Instance) then 
-        insert(AliveBosses, Instance.Name)
+        table.insert(AliveBosses, Instance.Name)
         Bosses[Instance.Name] = Instance.Name 
     else 
         Mobs[Instance.Name] = Instance.Name 
     end 
-    insert(Entities, {Instance, Spawn})
-end 
+    
+    table.insert(Entities, {Instance, Spawn})
+end
+
 
 local Removed = function(Instance)
     if IsBoss(Instance) then 
